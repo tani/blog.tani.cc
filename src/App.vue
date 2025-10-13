@@ -7,11 +7,11 @@
                 <RouterLink to="/posts">記事一覧</RouterLink>
             </nav>
         </header>
-        
-        <main>
+
+        <main class="prose prose-sm md:prose-base lg:prose-lg xl:prose-xl">
             <RouterView />
         </main>
-        
+
         <footer>
             <p>&copy; 2025 My Blog</p>
         </footer>
@@ -21,6 +21,12 @@
 <script setup lang="ts">
  import { RouterLink, RouterView } from 'vue-router'
 </script>
+
+<style>
+ svg {
+   display: inline-block;
+ }
+</style>
 
 <style scoped>
  nav {

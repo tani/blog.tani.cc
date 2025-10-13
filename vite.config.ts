@@ -25,8 +25,7 @@ export default defineConfig({
       markdownItSetup(md) {
           md.use(shiki)
           md.use(mathjax3)
-      },
-      wrapperClasses: 'prose prose-sm md:prose-base lg:prose-lg xl:prose-xl'
+      }
     }),
     Vue({
       include: [/\.vue$/, /\.md$/],
