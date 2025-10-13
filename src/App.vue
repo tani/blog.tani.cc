@@ -23,7 +23,7 @@
 </script>
 
 <style>
- svg {
+ mjx-container svg {
    display: inline-block;
  }
 </style>
