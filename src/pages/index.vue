@@ -1,30 +1,29 @@
 <template>
-	<main class="mx-auto max-w-2xl space-y-6 p-6">
-		<header>
-			<h1 class="text-3xl font-semibold">Posts</h1>
-			<p class="text-sm text-gray-500">
+	<div class="mx-auto my-6">
+		<div>
+			<h1 class="text-3xl">Posts</h1>
+			<p>
 				Browse every page sourced from Markdown files.
 			</p>
-		</header>
+		</div>
 
-		<ul class="space-y-4">
+		<ul class="my-4">
 			<li
 				v-for="page in pages"
 				:key="page.path"
-				class="rounded border p-4 transition hover:border-gray-400"
 			>
 				<RouterLink
 					:to="page.path"
-					class="text-xl font-medium text-blue-600 hover:underline"
+					class="hover:underline"
 				>
 					{{ page.title }}
 				</RouterLink>
-				<p v-if="page.description" class="mt-2 text-sm text-gray-500">
+				<p v-if="page.description" class="mt-2">
 					{{ page.description }}
 				</p>
 			</li>
 		</ul>
-	</main>
+	</div>
 </template>
 
 <script setup lang="ts">
