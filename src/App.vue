@@ -1,53 +1,36 @@
 <template>
-    <div id="app">
-        <header>
-            <nav>
-                <RouterLink to="/">ホーム</RouterLink>
-                <RouterLink to="/about">About</RouterLink>
-                <RouterLink to="/posts">記事一覧</RouterLink>
-            </nav>
-        </header>
+	<div id="app" class="font-serif">
+		<header class="mx-auto px-3 my-10 container">
+			<nav class="flex gap-3">
+				<RouterLink class="hover:border-b p-1" to="/">ホーム</RouterLink>
+				<RouterLink class="hover:border-b p-1" to="/about">About</RouterLink>
+				<RouterLink class="hover:border-b p-1" to="/posts">記事一覧</RouterLink>
+			</nav>
+		</header>
 
-        <main class="prose prose-sm md:prose-base lg:prose-lg xl:prose-xl">
-            <RouterView />
-        </main>
+		<main class="mx-auto px-3 my-3 container">
+			<article
+				class="mx-auto prose prose-sm md:prose-base lg:prose-lg xl:prose-xl"
+			>
+				<RouterView/>
+			</article>
+		</main>
 
-        <footer>
-            <p>&copy; 2025 My Blog</p>
-        </footer>
-    </div>
+		<footer class="mx-auto px-3 my-3 container">
+			<section
+				class="mx-auto prose prose-sm md:prose-base lg:prose-lg xl:prose-xl"
+			>
+				<p>&copy; 2025 My Blog</p>
+			</section>
+		</footer>
+	</div>
 </template>
 
 <script setup lang="ts">
- import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <style>
- mjx-container svg {
-   display: inline-block;
- }
-</style>
-
-<style scoped>
- nav {
-     display: flex;
-     gap: 1rem;
-     padding: 1rem;
-     background: #f5f5f5;
- }
-
- nav a {
-     text-decoration: none;
-     color: #42b983;
- }
-
- nav a.router-link-active {
-     font-weight: bold;
- }
-
- main {
-     max-width: 800px;
-     margin: 2rem auto;
-     padding: 0 1rem;
- }
+	mjx-container svg {
+		display: inline-block;
+	}
 </style>
