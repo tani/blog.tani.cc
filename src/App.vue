@@ -31,34 +31,24 @@
 import { computed } from "vue";
 import { useRoute } from "vue-router";
 import { useHead } from "@unhead/vue";
+import { usePosts } from "./composables/usePosts";
 
 const route = useRoute();
-const mods = import.meta.glob<any>("./pages/*.md", { eager: true });
+const { posts } = usePosts();
+
+const currentPost = computed(() => posts.value.find((p) => p.path === route.path));
 const date = computed(() => {
-	const m = mods[`./pages${route.path}.md`];
-	const d = m?.date || m?.frontmatter?.date || (route.meta.frontmatter as any)?.date;
+	const d = currentPost.value?.date;
 	return d ? new Date(d).toISOString().slice(0, 10) : "";
 });
 
 useHead({
-	title: computed(() => (route.meta.frontmatter as any)?.title || "My Blog"),
+	title: computed(() => currentPost.value?.title || "My Blog"),
 	meta: [
-		{
-			name: "description",
-			content: computed(() => (route.meta.frontmatter as any)?.description || "My personal blog"),
-		},
-		{
-			property: "og:title",
-			content: computed(() => (route.meta.frontmatter as any)?.title || "My Blog"),
-		},
-		{
-			property: "og:description",
-			content: computed(() => (route.meta.frontmatter as any)?.description || "My personal blog"),
-		},
-        {
-            property: "og:type",
-            content: "website",
-        },
+		{ name: "description", content: computed(() => currentPost.value?.description || "My personal blog") },
+		{ property: "og:title", content: computed(() => currentPost.value?.title || "My Blog") },
+		{ property: "og:description", content: computed(() => currentPost.value?.description || "My personal blog") },
+		{ property: "og:type", content: "website" },
 	],
 });
 </script>

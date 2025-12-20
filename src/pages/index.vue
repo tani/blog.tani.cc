@@ -28,9 +28,8 @@
 	</div>
 </template>
 <script setup lang="ts">
-import { computed } from "vue";
-import { routes } from "vue-router/auto-routes";
 import { useHead } from "@unhead/vue";
+import { usePosts } from "../composables/usePosts";
 
 useHead({
 	title: "Posts - My Blog",
@@ -41,29 +40,5 @@ useHead({
 	],
 });
 
-const modules = import.meta.glob<any>("./*.md", { eager: true });
-
-
-const pages = computed(() => {
-	return routes
-		.filter((r) => r.path !== "/" && r.path !== "/index")
-		.map((r) => {
-			const m = modules[`.${r.path}.md`];
-			const fm = (m?.frontmatter || m?.default?.frontmatter || m || r.meta?.frontmatter || r.meta) as any;
-			const title = (r.meta?.frontmatter as any)?.title || fm?.title || r.path.slice(1);
-			
-			return {
-				path: r.path,
-				title,
-				description: fm?.description,
-				date: fm?.date,
-			};
-		})
-		.sort((a, b) => {
-			if (a.date && b.date) return new Date(b.date).getTime() - new Date(a.date).getTime();
-			if (a.date) return -1;
-			if (b.date) return 1;
-			return a.title.localeCompare(b.title);
-		});
-});
+const { posts: pages } = usePosts();
 </script>
