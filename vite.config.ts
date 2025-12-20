@@ -30,17 +30,27 @@ export default defineConfig(({ command }) => {
 					md.use(mathjax3);
 					const origMathInline = md.renderer.rules.math_inline;
 					md.renderer.rules.math_inline = function (...args) {
-						const rendered = origMathInline?.apply(this, args) ?? "";
+						const rendered =
+							origMathInline?.apply(this, args) ?? "";
 						return rendered
 							.replace(/<mjx-container /, "<mjx-container v-pre ")
-							.replace(/<mjx-assistive-mml /, "<mjx-assistive-mml v-pre ");
+							.replace(
+								/<mjx-assistive-mml /,
+								"<mjx-assistive-mml v-pre ",
+							);
 					};
 					const origMathBlock = md.renderer.rules.math_block;
 					md.renderer.rules.math_block = function (...args) {
 						const rendered = origMathBlock?.apply(this, args) ?? "";
 						return rendered
-							.replace(/<mjx-container /, '<mjx-container v-pre tabindex="0" ')
-							.replace(/<mjx-assistive-mml /, "<mjx-assistive-mml v-pre ");
+							.replace(
+								/<mjx-container /,
+								'<mjx-container v-pre tabindex="0" ',
+							)
+							.replace(
+								/<mjx-assistive-mml /,
+								"<mjx-assistive-mml v-pre ",
+							);
 					};
 				},
 			}),

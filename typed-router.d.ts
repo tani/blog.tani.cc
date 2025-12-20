@@ -21,6 +21,7 @@ declare module 'vue-router/auto-routes' {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
     '/hello-world': RouteRecordInfo<'/hello-world', '/hello-world', Record<never, never>, Record<never, never>>,
     '/math-notes': RouteRecordInfo<'/math-notes', '/math-notes', Record<never, never>, Record<never, never>>,
+    '/mlg2025': RouteRecordInfo<'/mlg2025', '/mlg2025', Record<never, never>, Record<never, never>>,
   }
 
   /**
@@ -44,6 +45,10 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/math-notes.md': {
       routes: '/math-notes'
+      views: never
+    }
+    'src/pages/mlg2025.md': {
+      routes: '/mlg2025'
       views: never
     }
   }

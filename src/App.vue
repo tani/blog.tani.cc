@@ -2,9 +2,15 @@
 	<div id="app" class="font-serif">
 		<header class="mx-auto px-3 my-10 container">
 			<nav class="flex gap-3">
-				<RouterLink class="hover:border-b p-1" to="/">ホーム</RouterLink>
-				<RouterLink class="hover:border-b p-1" to="/about">About</RouterLink>
-				<RouterLink class="hover:border-b p-1" to="/posts">記事一覧</RouterLink>
+				<RouterLink class="hover:border-b p-1" to="/"
+					>ホーム</RouterLink
+				>
+				<RouterLink class="hover:border-b p-1" to="/about"
+					>About</RouterLink
+				>
+				<RouterLink class="hover:border-b p-1" to="/posts"
+					>記事一覧</RouterLink
+				>
 			</nav>
 		</header>
 
@@ -12,7 +18,7 @@
 			<article
 				class="mx-auto prose prose-sm md:prose-base lg:prose-lg xl:prose-xl"
 			>
-				<RouterView/>
+				<RouterView />
 			</article>
 		</main>
 
@@ -26,11 +32,10 @@
 	</div>
 </template>
 
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <style>
-	mjx-container svg {
-		display: inline-block;
-	}
+mjx-container svg {
+	display: inline-block;
+}
 </style>
