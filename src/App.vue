@@ -1,24 +1,26 @@
 <template>
-	<div id="app" class="font-serif">
-		<header class="mx-auto px-3 my-10 container">
-			<nav class="flex gap-3">
-				<RouterLink class="hover:border-b p-1" to="/"
+	<div id="app" font="serif">
+		<header mx="auto" px="3" my="10" container="~">
+			<nav flex="~" gap="3">
+				<RouterLink border="b transparent hover:black" p="1" to="/"
 					>ホーム</RouterLink
 				>
 			</nav>
 		</header>
 
-		<main class="mx-auto px-3 my-3 container">
+		<main mx="auto" px="3" my="3" container="~">
 			<article
-				class="mx-auto prose prose-sm md:prose-base lg:prose-lg prose-h1:text-2xl prose-h1:md:text-3xl"
+				mx="auto"
+				prose="~ sm md:base lg:lg"
+				prose-h1="text-2xl md:text-3xl"
 			>
-				<p v-if="date" class="text-sm text-gray-500 mb-2">{{ date }}</p>
+				<p v-if="date" text="sm gray-500" mb="2">{{ date }}</p>
 				<RouterView />
 			</article>
 		</main>
 
-		<footer class="mx-auto px-3 my-3 container">
-			<section class="mx-auto prose prose-sm md:prose-base lg:prose-lg">
+		<footer mx="auto" px="3" my="3" container="~">
+			<section mx="auto" prose="~ sm md:base lg:lg">
 				<p>&copy; 2025 My Blog</p>
 			</section>
 		</footer>
