@@ -5,16 +5,6 @@ import App from "./App.vue";
 
 vi.mock("vue-router/auto-routes", () => ({ routes: [] }));
 
-import { computed } from "vue";
-
-vi.mock("./composables/usePosts", () => ({
-	usePosts: () => ({
-		posts: computed(() => [
-			{ path: "/t", title: "Test Post", date: "2025-12-19" },
-		]),
-	}),
-}));
-
 const factory = async (meta = {}) => {
 	const router = createRouter({
 		history: createMemoryHistory(),
@@ -28,10 +18,10 @@ const factory = async (meta = {}) => {
 	return mount(App, { global: { plugins: [router] } });
 };
 
-it("renders date from posts composable", async () => {
-	// The meta is not used directly anymore in App.vue for date, it uses usePosts.
-	// But we mock usePosts above to return a post for /t.
-	const wrapper = await factory();
+it("renders date from route frontmatter", async () => {
+	const wrapper = await factory({
+		frontmatter: { date: "2025-12-19" },
+	});
 	expect(wrapper.text()).toContain("2025-12-19");
 });
 
