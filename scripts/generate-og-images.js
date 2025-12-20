@@ -89,7 +89,9 @@ for (const file of readdirSync(join(BASE, "src/pages")).filter((f) =>
 	);
 	const png = await renderOgPng({
 		title: data.title,
-		subtitle: data.date ? new Date(data.date).toISOString().slice(0, 10) : "",
+		subtitle: data.date
+			? new Date(data.date).toISOString().slice(0, 10)
+			: "",
 	});
 	const outputName = file.replace(".md", ".png");
 	writeFileSync(join(OUT, outputName), png);
