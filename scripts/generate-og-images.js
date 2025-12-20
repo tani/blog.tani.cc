@@ -22,12 +22,7 @@ const fontPath = fileURLToPath(
 );
 const font = readFileSync(fontPath);
 
-for (const file of readdirSync(join(BASE, "src/pages")).filter((f) =>
-	f.endsWith(".md"),
-)) {
-	const { data } = matter(
-		readFileSync(join(BASE, "src/pages", file), "utf-8"),
-	);
+const renderOgPng = async ({ title, subtitle }) => {
 	const svg = await satori(
 		{
 			type: "div",
@@ -50,16 +45,14 @@ for (const file of readdirSync(join(BASE, "src/pages")).filter((f) =>
 								fontWeight: 700,
 								marginBottom: 20,
 							},
-							children: data.title || "Untitled",
+							children: title || "Untitled",
 						},
 					},
 					{
 						type: "div",
 						props: {
 							style: { fontSize: 30, color: "#666" },
-							children: data.date
-								? new Date(data.date).toISOString().slice(0, 10)
-								: "",
+							children: subtitle || "",
 						},
 					},
 					{
@@ -84,9 +77,28 @@ for (const file of readdirSync(join(BASE, "src/pages")).filter((f) =>
 			fonts: [{ name: "Noto", data: font, weight: 700, style: "normal" }],
 		},
 	);
-	writeFileSync(
-		join(OUT, file.replace(".md", ".png")),
-		new Resvg(svg).render().asPng(),
+
+	return new Resvg(svg).render().asPng();
+};
+
+for (const file of readdirSync(join(BASE, "src/pages")).filter((f) =>
+	f.endsWith(".md"),
+)) {
+	const { data } = matter(
+		readFileSync(join(BASE, "src/pages", file), "utf-8"),
 	);
-	console.log(`Generated: ${file.replace(".md", ".png")}`);
+	const png = await renderOgPng({
+		title: data.title,
+		subtitle: data.date ? new Date(data.date).toISOString().slice(0, 10) : "",
+	});
+	const outputName = file.replace(".md", ".png");
+	writeFileSync(join(OUT, outputName), png);
+	console.log(`Generated: ${outputName}`);
 }
+
+const defaultPng = await renderOgPng({
+	title: "Taniguchi's Blog",
+	subtitle: "My personal blog",
+});
+writeFileSync(join(OUT, "default.png"), defaultPng);
+console.log("Generated: default.png");
