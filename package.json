@@ -5,9 +5,9 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
-		"build": "npm run generate:og && vite build",
+		"build:og": "node scripts/generate-og-images.js",
+		"build": "npm run build:og && vite build",
 		"preview": "vite preview",
-		"generate:og": "node scripts/generate-og-images.js",
 		"test": "vitest",
 		"typecheck": "tsc",
 		"lint": "oxlint && oxfmt --check",
