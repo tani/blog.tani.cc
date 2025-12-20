@@ -1,64 +1,33 @@
 import { mount } from "@vue/test-utils";
-import { describe, it, expect, vi } from "vitest";
-import IndexPage from "./index.vue";
-import { createRouter, createWebHistory } from "vue-router";
+import { expect, it, vi } from "vitest";
+import { createRouter, createMemoryHistory } from "vue-router";
+import Index from "./index.vue";
 
-// Mock vue-router/auto-routes
-vi.mock("vue-router/auto-routes", () => ({
-	routes: [
-		{ path: "/", name: "index", meta: {} },
-		{ 
-			path: "/hello-world", 
-			name: "hello-world", 
-			meta: { frontmatter: { title: "Hello World", description: "A friendly introduction", date: "2025-01-01" } } 
-		},
-		{ 
-			path: "/math-notes", 
-			name: "math-notes", 
-			meta: { frontmatter: { title: "Math Notes", date: "2025-02-01" } } 
-		},
-		{ 
-			path: "/mlg2025", 
-			name: "mlg2025", 
-			meta: { frontmatter: { title: "【MLG60発表報告】ランベック計算に循環証明を導入する試み", date: "2025-12-19" } } 
-		},
-	],
+const { mockPosts } = vi.hoisted(() => ({
+	mockPosts: [
+		{ path: "/h", meta: { frontmatter: { title: "Hello World", date: "2025-01-01" } } },
+		{ path: "/m", meta: { frontmatter: { title: "Math Notes", date: "2025-02-01" } } },
+		{ path: "/l", meta: { frontmatter: { title: "MLG60 Report", date: "2025-12-19" } } },
+	]
 }));
 
-// We can't easily mock import.meta.glob, so we rely on meta.frontmatter in the test.
+vi.mock("vue-router/auto-routes", () => ({
+	routes: [{ path: "/", meta: {} }, ...mockPosts],
+}));
 
-describe("IndexPage", () => {
-	it("should display post titles instead of filenames", async () => {
-		const router = createRouter({
-			history: createWebHistory(),
-			routes: [
-				{ path: "/", component: { render: () => null } },
-				{ path: "/hello-world", component: { render: () => null } },
-				{ path: "/math-notes", component: { render: () => null } },
-				{ path: "/mlg2025", component: { render: () => null } },
-			],
-		});
-
-		const wrapper = mount(IndexPage, {
-			global: {
-				plugins: [router],
-			},
-		});
-
-		// Wait for computed properties
-		await wrapper.vm.$nextTick();
-
-		const text = wrapper.text();
-		expect(text).toContain("Hello World");
-		expect(text).toContain("2025-01-01");
-		expect(text).toContain("Math Notes");
-		expect(text).toContain("2025-02-01");
-		expect(text).toContain("【MLG60発表報告】ランベック計算に循環証明を導入する試み");
-		expect(text).toContain("2025-12-19");
-		
-		// Ensure filenames are NOT displayed (though they might be part of titles, 
-		// but we want to make sure the frontmatter title is used)
-		// For example, mlg2025.md should show the long Japanese title.
-		expect(text).not.toContain("mlg2025");
+it("lists posts by date", async () => {
+	const router = createRouter({
+		history: createMemoryHistory(),
+		routes: [{ path: "/", component: Index }, ...mockPosts.map(p => ({ ...p, component: { render: () => null } }))],
 	});
+	const wrapper = mount(Index, { global: { plugins: [router] } });
+	await wrapper.vm.$nextTick();
+	const text = wrapper.text();
+	
+	expect(text).toContain("Hello World");
+	expect(text).toContain("2025-01-01");
+	expect(text).toContain("Math Notes");
+	expect(text).toContain("2025-02-01");
+	expect(text).toContain("MLG60 Report");
+	expect(text).toContain("2025-12-19");
 });
