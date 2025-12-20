@@ -139,6 +139,7 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+typed-router.d.ts
 
 # Generated OGP images
 public/og/
