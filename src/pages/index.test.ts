@@ -10,17 +10,17 @@ vi.mock("vue-router/auto-routes", () => ({
 		{ 
 			path: "/hello-world", 
 			name: "hello-world", 
-			meta: { frontmatter: { title: "Hello World", description: "A friendly introduction" } } 
+			meta: { frontmatter: { title: "Hello World", description: "A friendly introduction", date: "2025-01-01" } } 
 		},
 		{ 
 			path: "/math-notes", 
 			name: "math-notes", 
-			meta: { frontmatter: { title: "Math Notes" } } 
+			meta: { frontmatter: { title: "Math Notes", date: "2025-02-01" } } 
 		},
 		{ 
 			path: "/mlg2025", 
 			name: "mlg2025", 
-			meta: { frontmatter: { title: "【MLG60発表報告】ランベック計算に循環証明を導入する試み" } } 
+			meta: { frontmatter: { title: "【MLG60発表報告】ランベック計算に循環証明を導入する試み", date: "2025-12-19" } } 
 		},
 	],
 }));
@@ -35,6 +35,7 @@ describe("IndexPage", () => {
 				{ path: "/", component: { render: () => null } },
 				{ path: "/hello-world", component: { render: () => null } },
 				{ path: "/math-notes", component: { render: () => null } },
+				{ path: "/mlg2025", component: { render: () => null } },
 			],
 		});
 
@@ -49,8 +50,11 @@ describe("IndexPage", () => {
 
 		const text = wrapper.text();
 		expect(text).toContain("Hello World");
+		expect(text).toContain("2025-01-01");
 		expect(text).toContain("Math Notes");
+		expect(text).toContain("2025-02-01");
 		expect(text).toContain("【MLG60発表報告】ランベック計算に循環証明を導入する試み");
+		expect(text).toContain("2025-12-19");
 		
 		// Ensure filenames are NOT displayed (though they might be part of titles, 
 		// but we want to make sure the frontmatter title is used)
