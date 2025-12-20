@@ -5,7 +5,7 @@ import App from "./App.vue";
 
 vi.mock("vue-router/auto-routes", () => ({ routes: [] }));
 
-import { computed, ref } from "vue";
+import { computed } from "vue";
 
 vi.mock("./composables/usePosts", () => ({
 	usePosts: () => ({
@@ -36,8 +36,8 @@ it("renders date from posts composable", async () => {
 });
 
 it("omits date when missing", async () => {
-    // Override the mock for this test or use a different path
-    // Let's use a different path /m that is not in the mocked posts
+	// Override the mock for this test or use a different path
+	// Let's use a different path /m that is not in the mocked posts
 	const router = createRouter({
 		history: createMemoryHistory(),
 		routes: [

@@ -49,6 +49,23 @@ useHead({
 		{ property: "og:title", content: computed(() => currentPost.value?.title || "My Blog") },
 		{ property: "og:description", content: computed(() => currentPost.value?.description || "My personal blog") },
 		{ property: "og:type", content: "website" },
+		{
+			property: "og:image",
+			content: computed(() => {
+				if (currentPost.value) {
+					// Remove leading slash for the filename construction logic if path has it, but consistent with script
+					const slug = currentPost.value.path.replace(/^\//, "");
+					// Assuming the site is hosted at root or we need a base URL.
+					// For local/preview, relative might work or we can assume a domain.
+					// OGP usually requires absolute URL.
+					// For now, I'll use a placeholder domain or relative path if acceptable by the user's context (which implies static build).
+					// Better to use relative path and let the user configure base url later or use window.location.origin if client-side.
+					// But this is SSR-ish.
+					return `/og/${slug}.png`;
+				}
+				return "/og/default.png"; // Fallback if you have one, or just omit.
+			}),
+		},
 	],
 });
 </script>

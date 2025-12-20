@@ -5,14 +5,16 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
-		"build": "vite build",
+		"build": "npm run generate:og && vite build",
 		"preview": "vite preview",
+		"generate:og": "node scripts/generate-og-images.js",
 		"test": "vitest",
 		"typecheck": "tsc",
 		"lint": "oxlint && oxfmt --check",
 		"lint:fix": "oxlint --fix && oxfmt"
 	},
 	"dependencies": {
+		"@fontsource/noto-sans-jp": "^5.2.8",
 		"@shikijs/markdown-it": "^3.13.0",
 		"@unhead/vue": "^2.0.19",
 		"markdown-it-mathjax3": "^5.2.0",
@@ -25,10 +27,13 @@
 		"vue-router": "^4.6.4"
 	},
 	"devDependencies": {
+		"@resvg/resvg-js": "^2.6.2",
 		"@vue/test-utils": "^2.4.6",
+		"gray-matter": "^4.0.3",
 		"jsdom": "^27.3.0",
 		"oxfmt": "^0.19.0",
 		"oxlint": "^1.34.0",
+		"satori": "^0.18.3",
 		"vitest": "^4.0.16"
 	}
 }

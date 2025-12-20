@@ -139,3 +139,10 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Generated OGP images
+public/og/
+
+# OS metadata
+.DS_Store
+Thumbs.db
