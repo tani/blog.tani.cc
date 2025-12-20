@@ -30,6 +30,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useRoute } from "vue-router";
+import { useHead } from "@unhead/vue";
 
 const route = useRoute();
 const mods = import.meta.glob<any>("./pages/*.md", { eager: true });
@@ -37,6 +38,28 @@ const date = computed(() => {
 	const m = mods[`./pages${route.path}.md`];
 	const d = m?.date || m?.frontmatter?.date || (route.meta.frontmatter as any)?.date;
 	return d ? new Date(d).toISOString().slice(0, 10) : "";
+});
+
+useHead({
+	title: computed(() => (route.meta.frontmatter as any)?.title || "My Blog"),
+	meta: [
+		{
+			name: "description",
+			content: computed(() => (route.meta.frontmatter as any)?.description || "My personal blog"),
+		},
+		{
+			property: "og:title",
+			content: computed(() => (route.meta.frontmatter as any)?.title || "My Blog"),
+		},
+		{
+			property: "og:description",
+			content: computed(() => (route.meta.frontmatter as any)?.description || "My personal blog"),
+		},
+        {
+            property: "og:type",
+            content: "website",
+        },
+	],
 });
 </script>
 

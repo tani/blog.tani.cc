@@ -30,8 +30,19 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { routes } from "vue-router/auto-routes";
+import { useHead } from "@unhead/vue";
+
+useHead({
+	title: "Posts - My Blog",
+	meta: [
+		{ name: "description", content: "Browse all posts." },
+		{ property: "og:title", content: "Posts - My Blog" },
+		{ property: "og:description", content: "Browse all posts." },
+	],
+});
 
 const modules = import.meta.glob<any>("./*.md", { eager: true });
+
 
 const pages = computed(() => {
 	return routes
