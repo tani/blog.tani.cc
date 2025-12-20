@@ -28,14 +28,12 @@ const pages = computed(() =>
 	routes
 		.filter((r) => r.path !== "/" && r.path !== "/index")
 		.map((r) => {
-			const mod = Object.entries(modules).find(([path]) => path.replace(/^\./, "") === `${r.path}.md`)?.[1];
-			const title = mod?.title || mod?.frontmatter?.title || mod?.default?.frontmatter?.title;
-			const description = mod?.description || mod?.frontmatter?.description || mod?.default?.frontmatter?.description;
-
+			const m = modules[`.${r.path}.md`];
+			const fm = { ...m, ...m?.frontmatter, ...m?.default?.frontmatter };
 			return {
 				path: r.path,
-				title: title || "Untitled",
-				description: description,
+				title: fm.title || r.path.slice(1),
+				description: fm.description,
 			};
 		})
 		.sort((a, b) => a.title.localeCompare(b.title))
