@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import Shiki from "@shikijs/markdown-it";
 import mathjax3 from "markdown-it-mathjax3";
 import UnoCSS from "unocss/vite";
@@ -58,5 +59,9 @@ export default defineConfig(({ command }) => {
 				include: [/\.vue$/, /\.md$/],
 			}),
 		],
+		test: {
+			environment: "jsdom",
+			globals: true,
+		},
 	};
 });

@@ -5,12 +5,6 @@
 				<RouterLink class="hover:border-b p-1" to="/"
 					>ホーム</RouterLink
 				>
-				<RouterLink class="hover:border-b p-1" to="/about"
-					>About</RouterLink
-				>
-				<RouterLink class="hover:border-b p-1" to="/posts"
-					>記事一覧</RouterLink
-				>
 			</nav>
 		</header>
 

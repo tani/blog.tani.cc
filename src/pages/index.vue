@@ -22,37 +22,22 @@
 import { computed } from "vue";
 import { routes } from "vue-router/auto-routes";
 
-interface PageInfo {
-	path: string;
-	title: string;
-	description?: string;
-}
+const modules = import.meta.glob<any>("./*.md", { eager: true });
 
-// biome-ignore lint/correctness/noUnusedVariables: exposed to the template via <script setup>
-const pages = computed<PageInfo[]>(() =>
+const pages = computed(() =>
 	routes
-		.filter((route) => route.path !== "/")
-		.map((route) => {
-			const frontmatter = route.meta?.frontmatter as
-				| Record<string, unknown>
-				| undefined;
-
-			const title =
-				typeof frontmatter?.title === "string"
-					? frontmatter.title
-					: route.path.replace(/^\//, "");
-
-			const description =
-				typeof frontmatter?.description === "string"
-					? frontmatter.description
-					: undefined;
+		.filter((r) => r.path !== "/" && r.path !== "/index")
+		.map((r) => {
+			const mod = Object.entries(modules).find(([path]) => path.replace(/^\./, "") === `${r.path}.md`)?.[1];
+			const title = mod?.title || mod?.frontmatter?.title || mod?.default?.frontmatter?.title;
+			const description = mod?.description || mod?.frontmatter?.description || mod?.default?.frontmatter?.description;
 
 			return {
-				path: route.path,
-				title,
-				description,
+				path: r.path,
+				title: title || "Untitled",
+				description: description,
 			};
 		})
-		.sort((a, b) => a.title.localeCompare(b.title)),
+		.sort((a, b) => a.title.localeCompare(b.title))
 );
 </script>
