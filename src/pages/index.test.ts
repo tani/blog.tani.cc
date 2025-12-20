@@ -44,7 +44,6 @@ it("lists posts by date", async () => {
 	const wrapper = mount(Index, { global: { plugins: [router] } });
 	await router.isReady();
 	await wrapper.vm.$nextTick();
-	console.log(wrapper.html());
 	const text = wrapper.text();
 
 	expect(text).toContain("Hello World");
