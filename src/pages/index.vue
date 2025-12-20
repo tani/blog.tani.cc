@@ -41,24 +41,16 @@ useHead({
 	],
 });
 
-const modules = import.meta.glob<any>("../pages/*.md", { eager: true });
+const modules = import.meta.glob<any>("./*.md", { eager: true });
 const pages = computed(() =>
 	routes
 		.filter((r) => r.path !== "/" && r.path !== "/index")
 		.map((r) => {
-			const m = modules[`../pages${r.path}.md`];
-			const fm = (r.meta?.frontmatter ||
-				m?.frontmatter ||
-				m?.default?.frontmatter ||
-				m ||
-				r.meta) as any;
+			const slug = r.path.replace(/^\//, "");
+			const fm = modules[`./${slug}.md`];
 			return {
 				path: r.path,
-				title:
-					(r.meta?.frontmatter as any)?.title ||
-					fm?.title ||
-					(r.name as string) ||
-					r.path.slice(1),
+				title: fm?.title || (r.name as string) || slug,
 				description: fm?.description,
 				date: fm?.date,
 			};
