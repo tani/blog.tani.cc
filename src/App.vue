@@ -41,7 +41,7 @@ const date = computed(() => {
 });
 
 useHead({
-	title: computed(() => frontmatter.value?.title || "My Blog"),
+	title: computed(() => frontmatter.value?.title || "Taniguchi's Blog"),
 	meta: [
 		{
 			name: "description",
@@ -51,7 +51,7 @@ useHead({
 		},
 		{
 			property: "og:title",
-			content: computed(() => frontmatter.value?.title || "My Blog"),
+			content: computed(() => frontmatter.value?.title || "Taniguchi's Blog"),
 		},
 		{
 			property: "og:description",
