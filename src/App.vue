@@ -19,9 +19,20 @@
 			</article>
 		</main>
 
-		<footer mx="auto" px="3" my="3" container="~">
-			<section mx="auto" prose="~ sm md:base lg:lg">
-				<p>&copy; 2025 My Blog</p>
+		<footer mx="auto" px="3" my="10" container="~" border="t gray-200">
+			<section mx="auto" prose="~ sm md:base lg:lg" text="sm gray-500">
+				<p>&copy; 2025 Masaya Taniguchi (文責: Masaya Taniguchi)</p>
+				<p>
+					本ブログの記事は
+					<a
+						href="https://creativecommons.org/licenses/by-sa/4.0/"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="underline hover:text-black transition-colors"
+						>CC BY-SA 4.0</a
+					>
+					ライセンスの下で提供されています。
+				</p>
 			</section>
 		</footer>
 	</div>
@@ -72,7 +83,10 @@ useHead({
 </script>
 
 <style>
-mjx-container svg {
+mjx-container {
 	display: inline-block;
+	svg {
+		display: inline-block;
+	}
 }
 </style>
