@@ -1,0 +1,29 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "dev",
+			"label": "npm: dev",
+			"detail": "vite",
+			"isBackground": true,
+			"problemMatcher": {
+				"owner": "typescript",
+				"fileLocation": "relative",
+				"pattern": {
+					"regexp": "^\\s*(?:(?:ERROR|WARNING|INFO|LOG|DEBUG|TRACE)\\s+)?(.*)$",
+					"message": 1
+				},
+				"background": {
+					"activeOnStart": true,
+					"beginsPattern": ".*vite.*",
+					"endsPattern": ".*ready in.*"
+				}
+			},
+			"presentation": {
+				"focus": true,
+				"panel": "dedicated"
+			}
+		}
+	]
+}
