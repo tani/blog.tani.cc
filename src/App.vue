@@ -1,5 +1,5 @@
 <template>
-	<div id="app" font="serif">
+	<div id="app" class="font-serif antialiased">
 		<header mx="auto" px="3" my="10" container="~">
 			<nav flex="~" gap="3">
 				<RouterLink border="b transparent hover:black" p="1" to="/"
