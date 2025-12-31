@@ -5,8 +5,14 @@
 				<RouterLink border="b transparent hover:black" p="1" to="/"
 					>ホーム</RouterLink
 				>
-				<a href="https://tani.cc" target="_blank" rel="noopener noreferrer" border="b transparent hover:black" p="1"
-					>著者情報</a >
+				<a
+					href="https://tani.cc"
+					target="_blank"
+					rel="noopener noreferrer"
+					border="b transparent hover:black"
+					p="1"
+					>著者情報</a
+				>
 			</nav>
 		</header>
 

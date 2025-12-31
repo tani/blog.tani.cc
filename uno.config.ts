@@ -23,9 +23,9 @@ export default defineConfig({
 			provider: "bunny",
 			fonts: {
 				sans: ["Inter", "Noto Sans JP"],
-				serif: ["Shippori Mincho", "Noto Serif JP"],
+				serif: ["Zen Antique", "Noto Serif JP"],
 				mono: ["Fira Code", "Fira Mono:400,700"],
-				pretty: ["Shippori Mincho", "Noto Serif JP"],
+				pretty: ["Zen Antique", "Noto Serif JP"],
 			},
 		}),
 	],

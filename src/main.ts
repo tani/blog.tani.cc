@@ -1,15 +1,8 @@
 // src/main.ts
 
-import { createHead } from "@unhead/vue/client";
-import { createApp } from "vue";
-import { createRouter, createWebHistory } from "vue-router/auto";
+import { ViteSSG } from "vite-ssg";
 import { routes } from "vue-router/auto-routes";
 import App from "./App.vue";
 import "virtual:uno.css";
 
-const router = createRouter({
-	history: createWebHistory(),
-	routes,
-});
-const head = createHead();
-createApp(App).use(router).use(head).mount("#app");
+export const createApp = ViteSSG(App, { routes });

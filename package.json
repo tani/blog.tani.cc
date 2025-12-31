@@ -6,7 +6,7 @@
 	"scripts": {
 		"dev": "vite",
 		"build:og": "node scripts/generate-og-images.js",
-		"build": "npm run build:og && vite build",
+		"build": "npm run build:og && vite-ssg build",
 		"preview": "vite preview",
 		"test": "vitest",
 		"typecheck": "tsc",
@@ -35,6 +35,7 @@
 		"jsdom": "^27.3.0",
 		"oxfmt": "^0.19.0",
 		"oxlint": "^1.34.0",
+		"vite-ssg": "^28.2.2",
 		"vitest": "^4.0.16"
 	}
 }
